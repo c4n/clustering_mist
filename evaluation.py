@@ -41,7 +41,6 @@ def prepare_task_input(model, batch, args, is_contrastive=False):
 #         print(feat[0]['input_ids'][0])
         
 
-
         # W/ Augmentation
         return  feat, class_label.detach()
     
@@ -172,7 +171,7 @@ def evaluate_embedding(model, args, step, val_loader = None):
     kmeans = cluster.KMeans(n_clusters=args.num_classes, random_state=args.seed)
     embeddings = all_embeddings.cpu().numpy()
     kmeans.fit(embeddings)
-    pred_labels = torch.tensor(kmeans.labels_.astype(np.int))
+    pred_labels = torch.tensor(kmeans.labels_.astype(int))
     # clustering accuracy 
     confusion.add(pred_labels, all_labels)
     confusion.optimal_assignment(args.num_classes)
@@ -209,8 +208,3 @@ def evaluate_embedding(model, args, step, val_loader = None):
         writer.writerow(row)
     
     return None
-
-
-
-
-

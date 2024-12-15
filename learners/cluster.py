@@ -7,13 +7,10 @@ Date: 02/26/2021
 
 import torch
 import torch.nn as nn
-from torch.nn import functional as F
 from .cluster_utils import target_distribution
-from .contrastive_utils import SupConLoss
 from .criterion import KCL
-from sentence_transformers_local import models, losses
-from captum.attr import IntegratedGradients, LayerIntegratedGradients
-from captum.attr import configure_interpretable_embedding_layer, remove_interpretable_embedding_layer
+from sentence_transformers_local import losses
+
 
 class ClusterLearner(nn.Module):
     def __init__(self, model, feature_extractor, optimizer, temperature, base_temperature, contrastive_local_scale, contrastive_global_scale, clustering_scale, use_head = False, use_normalize = False):
